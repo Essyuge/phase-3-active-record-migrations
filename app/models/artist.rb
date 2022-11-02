@@ -6,19 +6,26 @@ ActiveRecord::Base.establish_connection(
     database: "db/artists.sqlite"
 )
 
-sql = <<-SQL
-  CREATE TABLE IF NOT EXISTS artists (
-  id INTEGER PRIMARY KEY,
-  name TEXT,
-  genre TEXT,
-  age INTEGER,
-  hometown TEXT,
-  favorite_flower TEXT
-  )
-SQL
-ActiveRecord::Base.connection.execute(sql)
 class Artist < ActiveRecord::Base
 end
+
+class AddFavoriteFoodToArtists < ActiveRecord::Migration[6.1]
+    def change
+      add_column :artists, :favorite_food, :string
+    end
+  end
+
+# sql = <<-SQL
+#   CREATE TABLE IF NOT EXISTS artists (
+#   id INTEGER PRIMARY KEY,
+#   name TEXT,
+#   genre TEXT,
+#   age INTEGER,
+#   hometown TEXT,
+#   favorite_flower TEXT
+#   )
+# SQL
+# ActiveRecord::Base.connection.execute(sql)
 
 # class CreateArtists < ActiveRecord::Migration[6.1]
 #     def change
